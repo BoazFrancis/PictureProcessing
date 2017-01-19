@@ -34,22 +34,13 @@ public class Process {
             Picture newPic = Utils.createPicture(picture.getHeight(), picture.getWidth());
             for (int x = 0; x < picture.getWidth(); x++) {
                 for (int y = 0; y < picture.getHeight(); y++) {
-                    newPic.setPixel(y, x, picture.getPixel(x, y));
+                    newPic.setPixel(picture.getHeight() - y - 1, x, picture.getPixel(x, y));
                 }
             }
             picture = newPic;
         }
-        else if (rotateBy == 180) {
-            flip('H');
-            flip('V');
-        }
-        else if (rotateBy == 270) {
+        for (int i = 0; i < (rotateBy / 90); i++) {
             rotate(90);
-            flip('H');
-            flip('V');
-        }
-        else {
-            System.err.println("Please enter a valid angle.");
         }
 
 
@@ -61,7 +52,7 @@ public class Process {
         if (flipOn == 'H') {
             for (int x = 0; x < picture.getWidth(); x++) {
                 for (int y = 0; y < picture.getHeight(); y++) {
-                    newPic.setPixel(picture.getWidth() - x, y, picture.getPixel(x, y));
+                    newPic.setPixel(picture.getWidth() - (x + 1), y, picture.getPixel(x, y));
                 }
             }
             picture = newPic;
@@ -69,7 +60,7 @@ public class Process {
         else if (flipOn == 'V') {
             for (int x = 0; x < picture.getWidth(); x++) {
                 for (int y = 0; y < picture.getHeight(); y++) {
-                    newPic.setPixel(x, picture.getHeight() - y, picture.getPixel(x, y));
+                    newPic.setPixel(x, picture.getHeight() - (y + 1), picture.getPixel(x, y));
                 }
             }
             picture = newPic;

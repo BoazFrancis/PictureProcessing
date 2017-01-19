@@ -23,6 +23,7 @@ public class Main {
       case "flip": {
         Process process = new Process(Utils.loadPicture(args[2]));
         process.flip(args[1].charAt(0));
+        Utils.savePicture(process.getPicture(), args[3]);
       } break;
       case "blend": {
         Process process = new Process(Utils.loadPicture(args[2]));

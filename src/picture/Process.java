@@ -80,7 +80,9 @@ public class Process {
             minH = Math.min(minH, pics[i].getHeight());
         }
         Picture newPic = Utils.createPicture(minW, minH);
-        int r, g, b;
+        int r;
+        int g;
+        int b;
         for (int x = 0; x < minW; x++) {
             for (int y = 0; y < minH; y++) {
                 r = 0;
@@ -97,7 +99,36 @@ public class Process {
         Utils.savePicture(newPic, srcs[srcs.length - 1]);
     }
 
-    public static void blur() {
-
+    public void blur() {
+        int sum;
+        Picture newPic = Utils.createPicture(picture.getWidth(), picture.getHeight());
+        int r;
+        int g;
+        int b;
+        for (int x = 0; x < picture.getWidth(); x++) {
+            for (int y = 0; y < picture.getHeight(); y++) {
+                if (x > 0 && y > 0 && x < picture.getWidth() - 1 && y < picture.getHeight() - 1)
+                {
+                    r = 0;
+                    b = 0;
+                    g = 0;
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            r += picture.getPixel(x + i, y + j).getRed();
+                            b += picture.getPixel(x + i, y + j).getBlue();
+                            g += picture.getPixel(x + i, y + j).getGreen();
+                        }
+                        newPic.setPixel(x, y, new Color(r/9, g/9, b/9));
+                    }
+                }
+                else
+                {
+                    newPic.setPixel(x, y, picture.getPixel(x, y));
+                }
+            }
+        }
+        picture = newPic;
     }
 }

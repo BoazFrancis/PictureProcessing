@@ -29,8 +29,9 @@ public class Main {
         Process.blend(args);
       } break;
       case "blur": {
-        Process process = new Process(Utils.loadPicture(args[2]));
+        Process process = new Process(Utils.loadPicture(args[1]));
         process.blur();
+        Utils.savePicture(process.getPicture(), args[2]);
       } break;
       default: System.err.println("Invalid input. Please try again");
 

@@ -37,20 +37,19 @@ public class Process {
     }
 
     public void rotate(int rotateBy) {
-        if (rotateBy == 90) {
-            Picture newPic = Utils.createPicture(picture.getHeight(), picture.getWidth());
-            for (int x = 0; x < picture.getWidth(); x++) {
-                for (int y = 0; y < picture.getHeight(); y++) {
-                    newPic.setPixel(picture.getHeight() - y - 1, x, picture.getPixel(x, y));
-                }
-            }
-            picture = newPic;
-        }
         for (int i = 0; i < (rotateBy / 90); i++) {
-            rotate(90);
+            rotate90();
         }
+    }
 
-
+    public void rotate90() {
+        Picture newPic = Utils.createPicture(picture.getHeight(), picture.getWidth());
+        for (int x = 0; x < picture.getWidth(); x++) {
+            for (int y = 0; y < picture.getHeight(); y++) {
+                newPic.setPixel(picture.getHeight() - y - 1, x, picture.getPixel(x, y));
+            }
+        }
+        picture = newPic;
     }
 
     public void flip(char flipOn) {

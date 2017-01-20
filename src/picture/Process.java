@@ -70,8 +70,31 @@ public class Process {
         }
     }
 
-    public void blend() {
-
+    public static void blend(String[] srcs) {
+        Picture[] pics = new Picture[srcs.length - 2];
+        int minW = Integer.MAX_VALUE;
+        int minH = Integer.MAX_VALUE;
+        for (int i = 0; i < srcs.length - 2; i++) {
+            pics[i] = Utils.loadPicture(srcs[i + 1]);
+            minW = Math.min(minW, pics[i].getWidth());
+            minH = Math.min(minH, pics[i].getHeight());
+        }
+        Picture newPic = Utils.createPicture(minW, minH);
+        int r, g, b;
+        for (int x = 0; x < minW; x++) {
+            for (int y = 0; y < minH; y++) {
+                r = 0;
+                b = 0;
+                g = 0;
+                for (Picture pic : pics) {
+                    r += pic.getPixel(x, y).getRed();
+                    b += pic.getPixel(x, y).getBlue();
+                    g += pic.getPixel(x, y).getGreen();
+                }
+                newPic.setPixel(x, y, new Color(r/pics.length, g/pics.length, b/pics.length));
+            }
+        }
+        Utils.savePicture(newPic, srcs[srcs.length - 1]);
     }
 
     public static void blur() {

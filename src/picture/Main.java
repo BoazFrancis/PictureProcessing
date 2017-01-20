@@ -26,8 +26,7 @@ public class Main {
         Utils.savePicture(process.getPicture(), args[3]);
       } break;
       case "blend": {
-        Process process = new Process(Utils.loadPicture(args[2]));
-        process.blend();
+        Process.blend(args);
       } break;
       case "blur": {
         Process process = new Process(Utils.loadPicture(args[2]));

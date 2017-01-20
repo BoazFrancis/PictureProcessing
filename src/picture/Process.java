@@ -2,7 +2,14 @@ package picture;
 
 public class Process {
     Picture picture;
+    Picture[] pics;
+
     public Process(Picture picture) {
+        this.picture = picture;
+    }
+
+    public Process(Picture[] pictures, Picture picture) {
+        this.pics = pictures;
         this.picture = picture;
     }
 
@@ -70,21 +77,13 @@ public class Process {
         }
     }
 
-    public static void blend(String[] srcs) {
-        Picture[] pics = new Picture[srcs.length - 2];
-        int minW = Integer.MAX_VALUE;
-        int minH = Integer.MAX_VALUE;
-        for (int i = 0; i < srcs.length - 2; i++) {
-            pics[i] = Utils.loadPicture(srcs[i + 1]);
-            minW = Math.min(minW, pics[i].getWidth());
-            minH = Math.min(minH, pics[i].getHeight());
-        }
-        Picture newPic = Utils.createPicture(minW, minH);
+    public void blend() {
+        Picture newPic = Utils.createPicture(picture.getWidth(), picture.getHeight());
         int r;
         int g;
         int b;
-        for (int x = 0; x < minW; x++) {
-            for (int y = 0; y < minH; y++) {
+        for (int x = 0; x < picture.getWidth(); x++) {
+            for (int y = 0; y < picture.getHeight(); y++) {
                 r = 0;
                 b = 0;
                 g = 0;
@@ -96,7 +95,7 @@ public class Process {
                 newPic.setPixel(x, y, new Color(r/pics.length, g/pics.length, b/pics.length));
             }
         }
-        Utils.savePicture(newPic, srcs[srcs.length - 1]);
+        picture = newPic;
     }
 
     public void blur() {

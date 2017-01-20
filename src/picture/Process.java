@@ -112,13 +112,12 @@ public class Process {
                             b += picture.getPixel(x + i, y + j).getBlue();
                             g += picture.getPixel(x + i, y + j).getGreen();
                         }
-                        newPic.setPixel(x, y, new Color(r / 9, g / 9, b / 9));
+                        picture.setPixel(x, y, new Color(r / 9, g / 9, b / 9));
                     }
                 } else {
-                    newPic.setPixel(x, y, picture.getPixel(x, y));
+                    picture.setPixel(x, y, picture.getPixel(x, y));
                 }
             }
         }
-        picture = newPic;
     }
 }

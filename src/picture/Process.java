@@ -21,7 +21,7 @@ public class Process {
         for (int x = 0; x < picture.getWidth(); x++) {
             for (int y = 0; y < picture.getHeight(); y++) {
                 Color pixel = picture.getPixel(x, y);
-                picture.setPixel(x, y, new Color(255 - pixel.getRed(),255 - pixel.getGreen(),255 - pixel.getBlue()));
+                picture.setPixel(x, y, new Color(255 - pixel.getRed(), 255 - pixel.getGreen(), 255 - pixel.getBlue()));
             }
         }
     }
@@ -51,7 +51,6 @@ public class Process {
         }
 
 
-
     }
 
     public void flip(char flipOn) {
@@ -63,16 +62,14 @@ public class Process {
                 }
             }
             picture = newPic;
-        }
-        else if (flipOn == 'V') {
+        } else if (flipOn == 'V') {
             for (int x = 0; x < picture.getWidth(); x++) {
                 for (int y = 0; y < picture.getHeight(); y++) {
                     newPic.setPixel(x, picture.getHeight() - (y + 1), picture.getPixel(x, y));
                 }
             }
             picture = newPic;
-        }
-        else {
+        } else {
             System.err.println("Please enter a valid direction (H/V)");
         }
     }
@@ -92,7 +89,7 @@ public class Process {
                     b += pic.getPixel(x, y).getBlue();
                     g += pic.getPixel(x, y).getGreen();
                 }
-                newPic.setPixel(x, y, new Color(r/pics.length, g/pics.length, b/pics.length));
+                newPic.setPixel(x, y, new Color(r / pics.length, g / pics.length, b / pics.length));
             }
         }
         picture = newPic;
@@ -106,24 +103,19 @@ public class Process {
         int b;
         for (int x = 0; x < picture.getWidth(); x++) {
             for (int y = 0; y < picture.getHeight(); y++) {
-                if (x > 0 && y > 0 && x < picture.getWidth() - 1 && y < picture.getHeight() - 1)
-                {
+                if (x > 0 && y > 0 && x < picture.getWidth() - 1 && y < picture.getHeight() - 1) {
                     r = 0;
                     b = 0;
                     g = 0;
-                    for (int i = -1; i <= 1; i++)
-                    {
-                        for (int j = -1; j <= 1; j++)
-                        {
+                    for (int i = -1; i <= 1; i++) {
+                        for (int j = -1; j <= 1; j++) {
                             r += picture.getPixel(x + i, y + j).getRed();
                             b += picture.getPixel(x + i, y + j).getBlue();
                             g += picture.getPixel(x + i, y + j).getGreen();
                         }
-                        newPic.setPixel(x, y, new Color(r/9, g/9, b/9));
+                        newPic.setPixel(x, y, new Color(r / 9, g / 9, b / 9));
                     }
-                }
-                else
-                {
+                } else {
                     newPic.setPixel(x, y, picture.getPixel(x, y));
                 }
             }
